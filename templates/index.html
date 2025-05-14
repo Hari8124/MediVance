@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MediVance</title>
+    <link rel="icon" href="/static/images/healthy.ico" type="image/x-icon">
+    <!-- Linking Google Fonts For Icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@32,400,0,0" />
+    <link rel="stylesheet" href="../static/style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <!-- App Header -->
+      <header class="app-header">
+        <h1 class="heading">Hi, I'm MediVance</h1>
+        <h4 class="sub-heading">Your personalized medical assistant</h4>
+      </header>
+      <!-- Suggestions List -->
+      <ul class="suggestions">
+        <li class="suggestions-item">
+          <p class="text">What could be the cause of persistent fatigue?</p>
+          <span class="icon material-symbols-rounded">favorite</span>
+        </li>
+        <li class="suggestions-item">
+          <p class="text">Suggest over-the-counter remedies for mild headaches.</p>
+          <span class="icon material-symbols-rounded">medication</span>
+        </li>
+        <li class="suggestions-item">
+          <p class="text">What are the early symptoms of diabetes?</p>
+          <span class="icon material-symbols-rounded">monitor_heart</span>
+        </li>
+        <li class="suggestions-item">
+          <p class="text">Suggest tests for chest pain and breathlessness.</p>
+          <span class="icon material-symbols-rounded">stethoscope</span>
+        </li>
+      </ul>
+      <!-- Chats -->
+      <div class="chats-container"></div>
+      <!-- Prompt Input -->
+      <div class="prompt-container">
+        <div class="prompt-wrapper">
+          <form action="#" class="prompt-form">
+            <input type="text" placeholder="Ask MediVance your medical query..." class="prompt-input" required />
+            <div class="prompt-actions">
+              <!-- File Upload Wrapper -->
+              <div class="file-upload-wrapper">
+                <img src="#" class="file-preview" />
+                <input id="file-input" type="file" accept="image/*, .pdf, .txt, .csv" hidden />
+                <button type="button" class="file-icon material-symbols-rounded">description</button>
+              </div>
+              <!-- Send Prompt and Stop Response Buttons -->
+              <button id="stop-response-btn" type="button" class="material-symbols-rounded">stop_circle</button>
+              <button id="send-prompt-btn" class="material-symbols-rounded">arrow_upward</button>
+            </div>
+          </form>
+          <!-- Theme and Delete Chats Buttons -->
+          <button id="theme-toggle-btn" class="material-symbols-rounded">light_mode</button>
+        </div>
+        <p class="disclaimer-text">MediVance provides health insights. Always consult a doctor for critical issues.</p>
+      </div>
+    </div>
+    <script src="/static/script.js"></script>
+  </body>
+</html>

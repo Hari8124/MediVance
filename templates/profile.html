@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MediVance</title>
+  <link rel="icon" href="/static/images/healthy.ico" type="image/x-icon" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" />
+  <link rel="stylesheet" href="/static/profilestyle.css" />
+</head>
+<body>
+  <div class="container">
+    <!-- App Header -->
+    <header class="app-header">
+      <h1 class="heading">Welcome to MediVance</h1>
+      <!--<h4 class="sub-heading">Let's get to know you better</h4>-->
+      <button id="theme-toggle-btn" class="material-symbols-rounded">light_mode</button>
+    </header>
+
+    <!-- Profile Form -->
+    <div class="profile-form-wrapper">
+      <form id="profile-form" class="prompt-form">
+        <div class="input-group">
+          <span class="material-symbols-rounded icon">person</span>
+          <input type="text" id="name" placeholder="Your Name" required />
+        </div>
+
+        <div class="input-group">
+          <span class="material-symbols-rounded icon">calendar_month</span>
+          <input type="number" id="age" placeholder="Your Age" min="1" required />
+        </div>
+
+        <div class="input-group">
+          <span class="material-symbols-rounded icon">wc</span>
+          <select id="gender" required>
+            <option value="">Select Gender</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+
+        <div class="input-group">
+          <span class="material-symbols-rounded icon">healing</span>
+          <input type="text" id="conditions" placeholder="Medical Conditions (comma-separated)" />
+        </div>
+
+        <button type="submit" class="material-symbols-rounded continue-btn">arrow_forward</button>
+      </form>
+
+      <p class="disclaimer-text">This info helps us personalize your medical experience.</p>
+    </div>
+
+  </div>
+
+  <script>
+    const themeToggleBtn = document.getElementById("theme-toggle-btn");
+    const isLightTheme = localStorage.getItem("themeColor") === "light_mode";
+    document.body.classList.toggle("light-theme", isLightTheme);
+    themeToggleBtn.textContent = isLightTheme ? "dark_mode" : "light_mode";
+
+    themeToggleBtn.addEventListener("click", () => {
+      const isLight = document.body.classList.toggle("light-theme");
+      localStorage.setItem("themeColor", isLight ? "light_mode" : "dark_mode");
+      themeToggleBtn.textContent = isLight ? "dark_mode" : "light_mode";
+    });
+
+    const profileForm = document.getElementById("profile-form");
+
+    profileForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      const profileData = {
+        name: document.getElementById("name").value,
+        age: document.getElementById("age").value,
+        gender: document.getElementById("gender").value,
+        conditions: document.getElementById("conditions").value.split(",").map(s => s.trim())
+      };
+
+      fetch("/set_profile", {
+        method: "POST",
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(profileData)
+      })
+        .then(res => res.json())
+        .then(() => {
+          // Redirect to chat page
+          window.location.href = "index.html";
+        })
+        .catch(err => console.error("Error saving profile:", err));
+    });
+  </script>
+</body>
+</html>
